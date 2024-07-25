@@ -1,0 +1,27 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menus</title>
+</head>
+<body>
+    <h1>Меню</h1>
+    {% for menu in menus %}
+        <h2>{{ menu.name }}</h2>
+        <ul>
+            {% for item in menu.items.all %}
+                <li>
+                    {% if item.url %}
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                    {% elif item.named_url %}
+                        <a href="{% url item.named_url %}">{{ item.title }}</a>
+                    {% else %}
+                        {{ item.title }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>
